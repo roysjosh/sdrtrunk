@@ -29,11 +29,13 @@ public class Phase2EncryptionSyncParameters implements IEncryptionSyncParameters
 {
     private EncryptionKeyIdentifier mEncryptionKeyIdentifier;
     private String mMessageIndicator;
+    private int[] mMessageIndicatorBytes;
 
-    public Phase2EncryptionSyncParameters(EncryptionKeyIdentifier encryptionKeyIdentifier, String messageIndicator)
+    public Phase2EncryptionSyncParameters(EncryptionKeyIdentifier encryptionKeyIdentifier, String messageIndicator, int[] messageIndicatorBytes)
     {
         mEncryptionKeyIdentifier = encryptionKeyIdentifier;
         mMessageIndicator = messageIndicator;
+        mMessageIndicatorBytes = messageIndicatorBytes;
     }
 
     @Override
@@ -46,5 +48,11 @@ public class Phase2EncryptionSyncParameters implements IEncryptionSyncParameters
     public String getMessageIndicator()
     {
         return mMessageIndicator;
+    }
+
+    @Override
+    public int[] getMessageIndicatorBytes()
+    {
+        return mMessageIndicatorBytes;
     }
 }

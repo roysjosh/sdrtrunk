@@ -137,6 +137,24 @@ public class EncryptionSynchronizationSequence extends P25P2Message implements I
     }
 
     @Override
+    public int[] getMessageIndicatorBytes()
+    {
+        int[] mi = new int[9];
+
+        mi[0] = mMessage.getByte(MESSAGE_INDICATOR_1);
+        mi[1] = mMessage.getByte(MESSAGE_INDICATOR_2);
+        mi[2] = mMessage.getByte(MESSAGE_INDICATOR_3);
+        mi[3] = mMessage.getByte(MESSAGE_INDICATOR_4);
+        mi[4] = mMessage.getByte(MESSAGE_INDICATOR_5);
+        mi[5] = mMessage.getByte(MESSAGE_INDICATOR_6);
+        mi[6] = mMessage.getByte(MESSAGE_INDICATOR_7);
+        mi[7] = mMessage.getByte(MESSAGE_INDICATOR_8);
+        mi[8] = mMessage.getByte(MESSAGE_INDICATOR_9);
+
+        return mi;
+    }
+
+    @Override
     public boolean isValid()
     {
         return true;

@@ -26,6 +26,7 @@ import io.github.dsheirer.bits.BinaryMessage;
 import io.github.dsheirer.bits.CorrectedBinaryMessage;
 import io.github.dsheirer.edac.ReedSolomon_63_35_29_P25;
 import io.github.dsheirer.module.decode.p25.phase2.enumeration.DataUnitID;
+import io.github.dsheirer.module.decode.p25.phase2.enumeration.Voice4VOffset;
 import io.github.dsheirer.module.decode.p25.phase2.message.mac.MacMessage;
 import io.github.dsheirer.module.decode.p25.phase2.message.mac.MacMessageFactory;
 import io.github.dsheirer.module.decode.p25.phase2.message.mac.UnknownMacMessage;
@@ -116,6 +117,11 @@ public class SacchTimeslot extends AbstractSignalingTimeslot
     public SacchTimeslot(CorrectedBinaryMessage message, int timeslot, long timestamp)
     {
         super(message, DataUnitID.UNSCRAMBLED_SACCH, timeslot, timestamp);
+    }
+
+    public Voice4VOffset getOffsetToNextVoice4VStart()
+    {
+        return MacMessage.getOffsetToNextVoice4VStart(getMessage());
     }
 
     @Override

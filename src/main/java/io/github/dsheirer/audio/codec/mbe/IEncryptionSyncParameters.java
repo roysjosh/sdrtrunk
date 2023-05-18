@@ -39,4 +39,6 @@ public interface IEncryptionSyncParameters
      * @return key generator fill values
      */
     String getMessageIndicator();
+
+    int[] getMessageIndicatorBytes();
 }

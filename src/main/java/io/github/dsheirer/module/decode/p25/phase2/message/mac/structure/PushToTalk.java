@@ -30,6 +30,8 @@ import io.github.dsheirer.module.decode.p25.audio.Phase2EncryptionSyncParameters
 import io.github.dsheirer.module.decode.p25.identifier.encryption.APCO25EncryptionKey;
 import io.github.dsheirer.module.decode.p25.identifier.radio.APCO25RadioIdentifier;
 import io.github.dsheirer.module.decode.p25.identifier.talkgroup.APCO25Talkgroup;
+import io.github.dsheirer.module.decode.p25.phase2.enumeration.Voice4VOffset;
+import io.github.dsheirer.module.decode.p25.phase2.message.mac.MacMessage;
 import io.github.dsheirer.module.decode.p25.phase2.message.mac.MacOpcode;
 import io.github.dsheirer.module.decode.p25.phase2.message.mac.MacStructure;
 
@@ -72,6 +74,11 @@ public class PushToTalk extends MacStructure
         return MacOpcode.PUSH_TO_TALK;
     }
 
+    public Voice4VOffset getOffsetToNextVoice4VStart()
+    {
+        return MacMessage.getOffsetToNextVoice4VStart(getMessage());
+    }
+
     /**
      * Textual representation of this message
      */
@@ -103,7 +110,7 @@ public class PushToTalk extends MacStructure
      */
     public IEncryptionSyncParameters getEncryptionSyncParameters()
     {
-        return new Phase2EncryptionSyncParameters(getEncryptionKey(), getMessageIndicator());
+        return new Phase2EncryptionSyncParameters(getEncryptionKey(), getMessageIndicator(), getMessageIndicatorBytes());
     }
 
     /**
@@ -114,6 +121,16 @@ public class PushToTalk extends MacStructure
         return getMessage().getHex(MESSAGE_INDICATOR_START + getOffset(), MESSAGE_INDICATOR_END + getOffset());
     }
 
+    public int[] getMessageIndicatorBytes()
+    {
+        int[] mi = new int[9];
+
+        for (int i = 0; i < mi.length; i++)
+        {
+            mi[i] = getMessage().getByte(MESSAGE_INDICATOR_START + getOffset() + i * 8);
+        }
+        return mi;
+    }
 
     /**
      * Encryption key that specifies the encryption algorithm and the key ID

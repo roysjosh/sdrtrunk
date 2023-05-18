@@ -120,9 +120,9 @@ public class MacMessage extends P25P2Message
     /**
      * Offset to the next Voice 4V start sequence
      */
-    public Voice4VOffset getOffsetToNextVoice4VStart()
+    public static Voice4VOffset getOffsetToNextVoice4VStart(CorrectedBinaryMessage message)
     {
-        return Voice4VOffset.fromValue(getMessage().getInt(OFFSET_TO_NEXT_VOICE_4V_START));
+        return Voice4VOffset.fromValue(message.getInt(OFFSET_TO_NEXT_VOICE_4V_START));
     }
 
     @Override
